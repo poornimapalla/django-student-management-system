@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Management System</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #faf7f5;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #8b6262;
+        }
+
+        .add {
+            display: inline-block;
+            background: #9b7070;
+            color: white;
+            padding: 12px 18px;
+            text-decoration: none;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th {
+            background: #eadcdc;
+            color: #6f4d4d;
+        }
+
+        th, td {
+            padding: 14px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .edit {
+            background: #c59b70;
+            color: white;
+            padding: 7px 12px;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        .delete {
+            background: #bd7777;
+            color: white;
+            padding: 7px 12px;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        .empty {
+            text-align: center;
+            color: #777;
+            padding: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Student Management System</h1>
+
+    <a href="{% url 'add_student' %}" class="add">
+        + Add Student
+    </a>
+
+    {% if students %}
+
+    <table>
+
+        <tr>
+            <th>Name</th>
+            <th>Roll Number</th>
+            <th>Email</th>
+            <th>Course</th>
+            <th>Age</th>
+            <th>Actions</th>
+        </tr>
+
+        {% for student in students %}
+
+        <tr>
+            <td>{{ student.name }}</td>
+            <td>{{ student.roll_number }}</td>
+            <td>{{ student.email }}</td>
+            <td>{{ student.course }}</td>
+            <td>{{ student.age }}</td>
+
+            <td>
+                <a href="{% url 'edit_student' student.id %}" class="edit">
+                    Edit
+                </a>
+
+                <a href="{% url 'delete_student' student.id %}" class="delete">
+                    Delete
+                </a>
+            </td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+    {% else %}
+
+    <div class="empty">
+        No students available.
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>
